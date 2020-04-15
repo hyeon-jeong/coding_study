@@ -16,4 +16,60 @@ n은 보수 가능한 최대 횟수를 의미합니다.
 n은 0이상 300000이하인 자연수입니다.
 만들 수 있는 가장 긴 정상 도로 구간의 길이를 return 하면 됩니다.'''
 
+import sys
+
+M = sys.stdin.readline().rstrip()
+road = M.split()[0] 
+road_cp = road 
+# 문자열에서는 인덱스를 이용해서 값을 바꾸는 것이 불가능하기 때문에 road를 자르기 위한 road를 복사한 값을 저장한다.
+re_road = '' 
+# 0을 1로 n번만큼 고쳤을 경우 이어질 수 있는 경우들을 저장한다.
+a = []
+# 0을 기준으로 구간을 저장한다.
+n = int(M.split()[1])
+index = [] # 문자열의 0의 위치를 저장한다.
+len_max = 0 # 0을 n번 1로 고칠 수 있는 경우의 수에서 가장 긴 길이를 저장한다.
+zero = road.count('0')
+
+if zero <= n : 
+# 0의 숫자가 고칠 수 있는 숫자보다 작거나 같으면
+    road.replace('0', '1') 
+    # 모든 0을 1로 바꾸면 된다.
+    print(len(road))
+
+else :
+    for j in range(0, zero - n +1) : 
+    # n개의 0을 변경할 수 있기 때문에 n개의 0은 남겨둘 수 있다.
+        for i in range(0, n) : 
+            index.append(road_cp.find('0')) 
+            # 제일 처음 0이 나온 위치를 저장한다.
+            a.append(road_cp[0:index[i]+1]) 
+            # n번 0이 나온 구간들을 저장한다.
+            # 문자열을 자르기 때문에 처음 인덱스를 0으로 고정해도 된다.
+            road_cp = road_cp[index[i]+1 :] 
+            # 0이 나온 다음 구간부터 끝까지 road_cp를 다시 정의한다.
+            re_road = re_road + a[i] 
+            # n번 0이 나온 구간들을 하나의 문자열로 만들어준다.
+            
+        if road_cp.find('0') == -1 : 
+        # 더 이상 문자열 안에 0이 존재하지 않으면 끝까지 탐색한 것을 의미하기 때문에
+            re_road = re_road + road_cp 
+            # 남은 road_cp 전체를 더해주면 된다.
+        else : 
+        # 탐색이 전부 끝나지 않았으면 
+            re_road = re_road + road_cp[0 : road_cp.find('0')] 
+            # n번 0이 나왔던 구간 + 다음 0이 나오기 전까지 구간을 더해주어서 최종적으로 긴 구간을 저장한다.
+            
+        length = len(re_road) 
+        # n번 0을 1로 바꾸었을 때 긴 구간을 최종적으로 저장했기 때문에 이 문자열의 길이가 1의 길이가 된다.
+        if length > len_max :
+            len_max = length
+        road = road[index[0] +1 :] 
+        # 맨 처음 0이 나온 구간의 경우의 수를 살펴보았기 때문에 문자열에서 잘라준다.
+        road_cp = road
+        index = []
+        a = []
+        re_road = ''
+
+print(len_max)
 
