@@ -19,3 +19,46 @@ nodeinfo[i] 는 i + 1번 노드의 좌표이며, [x축 좌표, y축 좌표] 순�
 모든 노드의 좌표 값은 0 이상 100,000 이하인 정수이다.
 트리의 깊이가 1,000 이하인 경우만 입력으로 주어진다.
 모든 노드의 좌표는 문제에 주어진 규칙을 따르며, 잘못된 노드 위치가 주어지는 경우는 없다.'''
+
+class Tree:
+    def __init__(self, List) :
+        self.data = max(List, key = lambda x : x[1]) # y 값이 가장 큰 좌표를 root로 한다.
+        L_list = list(filter(lambda x : x[0] < self.data[0], List)) # root보다 x 값이 작은 좌표는 왼쪽으로 
+        R_list = list(filter(lambda x : x[0] > self.data[0], List)) # root보다 x 값이 큰 좌표는 오른쪽으로
+        
+        if L_list == [] :
+            self.left = None # 왼쪽에 더 이상 값이 없으면 더 이상 왼쪽에 연결할 값이 없는 것이다.
+        else :
+            self.left = Tree(L_list)
+        
+        if R_list == [] :
+            self.right = None # 오른쪽에 더 이상 값이 없으면 더 이상 오른쪽에 연결할 값이 없는 것이다.
+        else :
+            self.right = Tree(R_list)
+
+def pre_order(node, pre_list) : #전위순위
+    pre_list.append(node.data)
+    if node.left is not None :
+        pre_order(node.left, pre_list)
+    if node.right is not None :
+        pre_order(node.right, pre_list)
+    return pre_list
+
+def post_order(node, post_list) : #후위순위
+    if node.left is not None :
+        post_order(node.left, post_list)
+    if node.right is not None :
+        post_order(node.right, post_list)
+    post_list.append(node.data)
+    return post_list
+        
+def solution(nodeinfo):
+    answer = []
+    root = Tree(nodeinfo)
+    pre_list = []
+    post_list = []
+    answer.append(list(map(lambda x : nodeinfo.index(x)+1, pre_order(root, pre_list))))
+    # 전위 순위한 죄표의 인덱스 +1 값이 해당 노드의 값이기 때문에 이렇게 출력한다.
+    answer.append(list(map(lambda x : nodeinfo.index(x)+1, post_order(root, post_list))))
+    # 후위 순위한 좌표의 인덱스 +1 값이 해당 노드의 값이기 때문에 이렇게 출력한다.
+    return answer
