@@ -12,3 +12,37 @@
 '''하나 또는 여러줄에 걸쳐서 문자열이 주어진다. 
 각 문자열은 영문 알파벳, 공백, 소괄호("( )") 대괄호("[ ]")등으로 이루어져 있으며, 길이는 100글자보다 작거나 같다.
 입력의 종료조건으로 맨 마지막에 점 하나(".")가 들어온다.'''
+
+import sys
+
+while(1) :
+    s = []
+    case = []
+    line = sys.stdin.readline().rstrip()
+    if line == '.' :
+        break
+    for i in range(0, len(line)) :
+        if line[i] == '(' :
+            s.append(line[i])
+        elif line[i] == ')' :
+            if len(s) > 0 and s[-1] == '(' :
+                s.pop()
+            else :
+                case.append('no')
+        elif line[i] == '[' :
+            s.append(line[i])
+        elif line[i] == ']' :
+            if len(s) > 0 and s[-1] == '[' :
+                s.pop()
+            else :
+                case.append('no')
+                break
+    if len(s) > 0 :
+        case.append('no')
+        
+    if 'no' in case :
+        print("no")
+        continue
+    else :
+        print("yes")
+        continue
