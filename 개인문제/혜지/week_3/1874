@@ -10,3 +10,28 @@
 '''첫 줄에 n (1 ≤ n ≤ 100,000)이 주어진다. 
 둘째 줄부터 n개의 줄에는 수열을 이루는 1이상 n이하의 정수가 하나씩 순서대로 주어진다. 
 물론 같은 정수가 두 번 나오는 일은 없다.'''
+
+import sys
+
+n = int(sys.stdin.readline().rstrip())
+s = []
+answer = []
+i = 1
+
+
+for k in range(0, n) :
+    a = int(sys.stdin.readline().rstrip())
+    while(i <= a) :
+        s.append(i)
+        answer.append('+')
+        i = i+1
+    if s[-1] == a :
+        s.pop()
+        answer.append('-')
+        continue
+
+if len(s) > 0 :
+    print("NO")
+else :
+    for i in range(0, len(answer)) :
+        print(answer[i])
