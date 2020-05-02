@@ -30,4 +30,4 @@ def solution(k, room_number):
     
 # 효율성 알고리즘
 
-
+# 유니온 파인드 최적화 방법으로 구현하면 된다.
