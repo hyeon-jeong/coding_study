@@ -21,3 +21,22 @@ stations의 크기: 10,000 이하의 자연수
 stations는 오름차순으로 정렬되어 있고, 배열에 담긴 수는 N보다 같거나 작은 자연수입니다.
 W: 10,000 이하의 자연수'''
 
+def solution(n, stations, w):
+    answer = 0
+    distance = []
+    
+    for i in range(0, len(stations)) :
+        s = (stations[i]-w-1) - (stations[i-1]+w)
+        distance.append(s)
+    distance.append(stations[0]-w-1)
+    distance.append(n - (stations[-1]+w))
+    
+    for i in range(0, len(distance)) :
+        if distance[i] <= 0 :
+            continue
+        while(distance[i] > 2*w+1) :
+            answer = answer +1
+            distance[i] = distance[i] - (2*w+1)
+        if distance[i] > 0 :
+            answer = answer+1
+    return answer
