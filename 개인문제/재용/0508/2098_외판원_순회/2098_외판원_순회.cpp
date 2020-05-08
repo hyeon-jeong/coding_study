@@ -56,7 +56,7 @@ int main() {
 
 	/* memoization에 사용될 배열 0으로 초기화 */
 	memset(memo, -1, sizeof(memo)); 
-	int distance = tsp(0, 1);
-	cout << distance << endl; // 시작점 = 0
+	int distance = tsp(0, 1); // 시작점 = 0
+	cout << distance << endl; 
 }
 
