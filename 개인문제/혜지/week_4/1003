@@ -16,3 +16,26 @@ N은 40보다 작거나 같은 자연수 또는 0이다.'''
 
 '''각 테스트 케이스마다 0이 출력되는 횟수와 1이 출력되는 횟수를 공백으로 구분해서 출력한다.'''
 
+import sys
+
+def fibonacci_0(n) :
+    fibo = []
+    fibo.append(1)
+    fibo.append(0)
+    for i in range(2, n+1) :
+        fibo.append(fibo[i-1] + fibo[i-2])
+    return fibo[n]
+
+def fibonacci_1(n) :
+    fibo = []
+    fibo.append(0)
+    fibo.append(1)
+    for i in range(2, n+1) :
+        fibo.append(fibo[i-1] + fibo[i-2])
+    return fibo[n]
+
+T = int(sys.stdin.readline().rstrip())
+
+for i in range (0, T) :
+    N = int(sys.stdin.readline().rstrip())
+    print("%d %d" %(fibonacci_0(N), fibonacci_1(N)))
