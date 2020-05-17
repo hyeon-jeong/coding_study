@@ -10,3 +10,18 @@ N이 주어졌을 때, P(N)을 구하는 프로그램을 작성하시오. '''
 
 '''각 테스트 케이스마다 P(N)을 출력한다.'''
 
+import sys
+
+T = int(sys.stdin.readline().rstrip())
+
+for i in range(0, T) :
+    N = int(sys.stdin.readline().rstrip())
+    P = []
+    P.append(1)
+    P.append(1)
+    P.append(1)
+
+    for i in range(3, N) :
+        P.append(P[i-3] + P[i-2])
+
+    print(P[N-1])
