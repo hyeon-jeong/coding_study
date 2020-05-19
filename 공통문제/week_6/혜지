@@ -14,3 +14,21 @@
 배점은 1이상 100이하의 자연수이다.'''
 
 '''각 테스트 케이스마다 학생들이 받을 수 있는 점수의 경우의 수를 출력한다.'''
+
+import sys
+
+T = int(sys.stdin.readline().rstrip())
+
+while T != 0 :
+    N = int(sys.stdin.readline().rstrip())
+    answer = [0]
+    a = list(map(int, sys.stdin.readline().split()))
+
+    for score in a :
+        for i in range(len(answer)) :
+            if answer[i] + score not in answer :
+                answer.append(answer[i] + score)
+    print(len(answer))
+    T = T -1
+    
+    # 답은 얻었지만 시간 초과도 같이 얻었다...^^
