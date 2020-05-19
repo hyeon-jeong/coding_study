@@ -15,39 +15,22 @@
 
 '''각 테스트 케이스마다 학생들이 받을 수 있는 점수의 경우의 수를 출력한다.'''
 
-import sys
+	# ///////////////////////////////////////////////////////////////////////////////////
+T = int(input())
 
-T = int(sys.stdin.readline().rstrip())
-
-while T != 0 :
-    N = int(sys.stdin.readline().rstrip())
-    answer = [0]
-    a = list(map(int, sys.stdin.readline().split()))
-
-    for score in a :
-        for i in range(len(answer)) :
-            if answer[i] + score not in answer :
-                answer.append(answer[i] + score)
-    print(len(answer))
-    T = T -1
-    
-    # 답은 얻었지만 시간 초과도 같이 얻었다...^^
-    
-    T = int(input())
-
-while T != 0 :
+for i in range(T) :
     N = int(input())
     a = list(map(int, input().split()))
     answer = [1] + [0]*sum(a)
+    sum_list = [0]
 
     for score in a :
-        k = answer.count(1)
-        for i in range(len(answer)) :
-            if answer[i] == 1 :
-                answer[i+score] = 1
-                k = k-1
-            if k == 0 :
-                break
-    print(answer.count(1))
-    T = T -1
-# 테스트 케이스는 다 맞았는데 오답이 나온다....ㅜ,ㅜ
+        t_list = list(sum_list)
+        for j in t_list :
+            if answer[j+score] == 0 :
+                answer[j+score] = 1
+                sum_list.append(j+score)
+    print("#%d" %(i+1), "%d" %answer.count(1))
+
+    # ///////////////////////////////////////////////////////////////////////////////////
+# 출력 양식이 있는 걸 모르고 계속 삽질했어요..ㅎ
