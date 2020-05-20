@@ -15,3 +15,16 @@
 각 날의 매매가는 10,000이하이다.'''
 
 '''각 테스트 케이스마다 ‘#x’(x는 테스트케이스 번호를 의미하며 1부터 시작한다)를 출력하고, 최대 이익을 출력한다.'''
+
+T = int(input())
+
+for i in range(1, T+1) :
+    N = int(input())
+    sell = list(map(int, input().split()))
+    answer = 0
+    while len(sell) != 0 :
+        a = sell.index(max(sell))
+        for j in range(a) :
+            answer = answer + (sell[a] - sell[j])
+        sell = sell[a+1:]
+    print("#%d" %i, "%d" %answer)
