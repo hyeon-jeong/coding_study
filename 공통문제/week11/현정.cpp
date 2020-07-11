@@ -6,31 +6,36 @@
 
 using namespace std;
 
-string input[301];
-int visit[301][301]; // 방문확인용
-int popping[301][301]; //지뢰 개수 저장용
+string input[301]; //지뢰 map
+//int visit[301][301]; // 방문확인용
+int popping[301][301]; //지뢰 count 저장용
 //vector <int> bomb;
 int dx[8] = {0, 0, -1, -1, -1, 1, 1, 1};
 int dy[8] = {1, -1, 1, 0, -1, 1, 0, -1};
-int click; //결과
+int click;
 int t,n; // 입력받을 변수
 
 void dfs(int x, int y){
     click ++; // 이게 맞을까..?
-    visit[x][y] = 1;
+    //visit[x][y] = 1; 이거 딱히 필요없을듯. 중복 count 되어야 하니까
+    int count=0;
     for(int i=0; i<8; i++){
         int nx = x + dx[i];
         int ny = y + dy[i];
         if(0<= nx && nx < n && 0 <= ny && ny < n){
-            if(popping[nx][ny] == '*' && visit[nx][ny] == 0){
+            //주변 지뢰 탐색 후 count
+            if(input[nx][ny]=='*' && input[x][y]=='.'){
+                count++; // popping[x][y] 를 바로 ++ 할까...?
+                //continue;
+            }
+            if(input[nx][ny]=='.' && popping[x][y]==0){
+                //printf("%c", input[x][y]);
                 dfs(nx,ny);
             }
-            else if(popping[nx][ny] == '.' && visit[nx][ny] == 0){
-                continue; // ..? 
-            }
-            //만약에 전부 다 탐색했다면 if문을 어떻게 만들어야 하지..?
         }
     }
+    popping[x][y] = count;
+
 }
 
 int main(void){
@@ -38,22 +43,38 @@ int main(void){
     scanf("%d", &t);
     for(int i=1; i<=t; i++){
         scanf("%d", &n);
-        //string input[301]; // 입력 저장 -> 다른 배열에 저장해주어야 함. 아니근데 이거 테스트케이스마다 덮어써지면 에러날것 같은데...?ㅜㅜ
-        //memset(visit, 0, sizeof(visit));
-        //memset(popping, 0, sizeof(popping));
+        memset(popping, 0, sizeof(popping));
+        //int min=n*n;
         for(int j=0; j<n; j++){
             cin >> input[j];
         }
+
+        cout << "???"<<'\n';
         for(int l=0; l<n; l++){
             for(int m=0; m<n; m++){
-                if(input[l][m] == '*' && visit[l][m] == 0){ //문자열 비교할때, equals 였나..?
-                    click = 0;
+                if(input[l][m]=='.'){
                     dfs(l,m);
-
                 }
+                /*
+                if(click < min){
+                    min = click;
+                }
+                */
+               //cout << click << '\n';
             }
         }
+    
+        cout << "\n" << "result" << "\n";
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                printf("%d ", popping[i][j]);
+            }
+            cout << "\n";
+        }
+        
+        printf("\n");
         printf("#%d %d\n", i, click);
+        printf("\n");
     }
 
 
