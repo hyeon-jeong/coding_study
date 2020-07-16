@@ -15,6 +15,7 @@ int dy[8] = {1, -1, 1, 0, -1, 1, 0, -1};
 int click;
 int t,n; // 입력받을 변수
 
+//bfs 로 바꿔보기...
 void dfs(int x, int y){
     click ++; // 이게 맞을까..?
     //visit[x][y] = 1; 이거 딱히 필요없을듯. 중복 count 되어야 하니까
