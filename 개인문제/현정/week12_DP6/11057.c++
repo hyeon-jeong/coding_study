@@ -36,15 +36,7 @@ int main(){
     }
     
     printf("%d", sum%10007);
-    
-    /*
-    for(int i=0; i<=n; i++){
-        printf("\n");
-        for(int j=0; j<10; j++){
-            printf("%d ", dp[i][j]);
-        }
-    }
-    */
+
 
     return 0;
 }

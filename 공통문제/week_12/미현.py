@@ -16,7 +16,6 @@ def solution(gems):
     for i in range(gems_len):
         item[gems[i]].append(i)
         
-
     sol = [-1 for _ in range(gems_len)]
     
     # 맨 앞에서 시작하는 sol 값 설정
