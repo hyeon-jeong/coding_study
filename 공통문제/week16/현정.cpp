@@ -6,8 +6,7 @@
 
 using namespace std;
 
-queue < pair<int,int> > q;
-
+queue < pair<int,long long> > q;
 int solution(vector<int> food_times, long long k) {
     int answer = 0;
     
@@ -27,3 +26,4 @@ int solution(vector<int> food_times, long long k) {
     
     return answer;
 }
+
