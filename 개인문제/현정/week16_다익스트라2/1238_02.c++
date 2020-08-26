@@ -4,24 +4,23 @@
 #include <queue>
 #include <vector>
 #include <cstdio>
-#define INF 1000000
+#define INF 10000000
 
 using namespace std;
 int N, M, X, s, e, t;
-vector < pair <int, int> > vilage[1001];
+vector < pair <int, int> > vilage_1[1001];
+vector < pair <int, int> > vilage_2[1001];
+int times[1001];
 priority_queue < pair <int, int> > pq;
 
-vector<int>  djikstra(int a){
-    vector<int> times(N+1, INF);
+int djikstra(int a, int b, vector < pair <int, int> > vilage){
     times[a] = 0;
     pq.push(make_pair(0, a));
     while(!pq.empty()){
         int vil = pq.top().second;
         int time = -pq.top().first;
         pq.pop();
-
-        if(times[vil] < time) continue;
-
+        if(times[vil] > time) continue;
         for(int i=0; i<vilage[vil].size(); i++){
             int new_time = time + vilage[vil][i].second;
             if(times[vilage[vil][i].first] > new_time){
@@ -30,22 +29,21 @@ vector<int>  djikstra(int a){
             }
         }
     }
-    return times;
+    return times[b];
 }
 
 int main(){
+    memset(times, INF, sizeof(times));
     cin >> N >> M >> X ;
     for(int i=0; i<M; i++){
         cin >> s >> e >> t;
-        vilage[s].push_back(make_pair(e,t));
+        vilage_1[s].push_back(make_pair(e,t));
+        vilage_2[e].push_back(make_pair(s,t));
     }
     int max_time = 0;
-    vector<int> come = djikstra(X);
-    for(int i=1; i<=N; i++){
-        vector<int> go = djikstra(i);
-        //cout << "go[X] : " << go[X] <<" come[i]: "<<come[i]<<"\n";
-        if(max_time < go[X]+come[i]) max_time = go[X]+come[i];
-    }
-    cout << max_time ;
+    int go = djikstra(i, X, vilage_1);
+    int come = djikstra(X, i, vilage_2);
+    if(max_time < go+come) max_time = go+come;
+
     return 0;
 }
