@@ -33,7 +33,7 @@ def bfs(i, j) :
 N = int(sys.stdin.readline())
 A = []
 answer = 0
-size = 0
+cny = 0
 
 for i in range(N) :
     a = list(map(int, sys.stdin.readline().split()))
@@ -55,11 +55,14 @@ while True :
     #더 이상 먹을 물고기가 없음
         break
     A[x][y] = A[i][j]
+    #아기 상어의 크기 저장
     A[i][j] = 0
     start = [x, y]
-    size = size + 1
-    if size == A[x][y] :
-        size = 0
+    cnt = cnt + 1
+    #먹은 물고기의 수 체크
+    if cnt == A[x][y] :
+        cnt = 0
         A[x][y] = A[x][y] +1
+        #먹을 물고기 수가 상어의 크기가 같으면 상어의 크기 키우기
     answer = answer+dist
 print(answer)
