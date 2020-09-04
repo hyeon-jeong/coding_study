@@ -23,13 +23,13 @@ int main(){
 	int n;
 	cin>>n;
 
-	vector<Stud> vec(n);
+	vector<Stud> v(n);
   
 	for(int i=0; i<n; i++) 
-		cin>>vec[i].name>>vec[i].kor>>vec[i].eng>>vec[i].math;
+		cin>>v[i].name>>v[i].kor>>v[i].eng>>v[i].math;
 	
-	sort(vec.begin(), vec.end(), compare);
+	sort(v.begin(), v.end(), compare);
 
 	for(int i=0; i<n; i++)
-		cout<<vec[i].name<<'\n';
+		cout<<v[i].name<<'\n';
 }
