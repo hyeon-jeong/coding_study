@@ -1,5 +1,8 @@
+// Brute Force
+
 #include <iostream>
 using namespace std;
+
 int n,cnt,tmp,flag,ans;
 
 int main(){
