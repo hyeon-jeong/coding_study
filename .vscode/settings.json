@@ -8,6 +8,7 @@
         "deque": "cpp",
         "string": "cpp",
         "utility": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "iosfwd": "cpp"
     }
 }
