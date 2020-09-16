@@ -1,16 +1,18 @@
+//N과 M(2)
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 int n,m;
-int numbers[9]={};
-int visited[9]={};
+int numbers[9] = {0,};
+int visited[9]={0,};
 
 //dfs_backtracking
 void backtracking(int i){
     //조건 만족시 출력
-    if (i==m){
-        for(int j=0; j<m ; j++){
+    if (i == m){
+        for(int j=1; j<=m ; j++){
             cout << numbers[j] << " ";
         }
         cout << "\n";
@@ -19,7 +21,7 @@ void backtracking(int i){
 
     //재귀 들어가는 부분
     //1부터 N까지의 수 대입
-    for(int j=i+1; j<=n; j++){ // 이거 말구 1~N까지 해도 되지 않을까?
+    for(int j=numbers[i]+1; j<=n; j++){ // 이거 말구 1~N까지 해도 되지 않을까?
         if(visited[j]==0 && numbers[i-1] < j) // 구글링하면 이걸 빼는경우가 많았음. 대체 왜..?
         {
             visited[j] = 1;
