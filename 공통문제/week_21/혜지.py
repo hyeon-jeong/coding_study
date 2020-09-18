@@ -15,8 +15,28 @@ Pi	10	20	10	20	15	40	200
 퇴사 전에 할 수 있는 상담의 최대 이익은 1일, 4일, 5일에 있는 상담을 하는 것이며, 이때의 이익은 10+20+15=45이다.
 상담을 적절히 했을 때, 백준이가 얻을 수 있는 최대 수익을 구하는 프로그램을 작성하시오.'''
 
-'''첫째 줄에 N (1 ≤ N ≤ 15)이 주어진다.'''
-둘째 줄부터 N개의 줄에 Ti와 Pi가 공백으로 구분되어서 주어지며, 1일부터 N일까지 순서대로 주어진다. (1 ≤ Ti ≤ 5, 1 ≤ Pi ≤ 1,000)
+'''첫째 줄에 N (1 ≤ N ≤ 15)이 주어진다.
+둘째 줄부터 N개의 줄에 Ti와 Pi가 공백으로 구분되어서 주어지며, 1일부터 N일까지 순서대로 주어진다. (1 ≤ Ti ≤ 5, 1 ≤ Pi ≤ 1,000)'''
 
 '''첫째 줄에 백준이가 얻을 수 있는 최대 이익을 출력한다.'''
+
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+M = []
+
+for i in range(N) :
+    M.append(list(map(int, input().split())))
+    
+dp = [0 for _ in range(N)]
+
+for i in range(N) :
+    if i + M[i][0] <= N :
+        dp[i] = M[i][1]
+        for j in range(i) :
+            if j + M[j][0] <= i :
+                dp[i] = max(dp[i], dp[j] + M[i][1])
+
+print(max(dp))
 
