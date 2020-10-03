@@ -22,15 +22,17 @@ void bfs(int x, int y){
     visit[x][y] = 1;
     //day[x][y] = 1;
 
+    /*
     for(int i=0; i<n; i++){
         for(int j=0; j<m; j++){
             //이미 익은 상태의 토마토들
             if(box[i][j] == 1 && visit[i][j] == 0){
                 q.push(make_pair(i, j));
-                visit[i][j] =1; //방문했다고 쳐야지
+                visit[i][j] =1; //방문했다고 쳐야지 -> 여기서 잘못되었을수도..?
             }
         }
     }
+    */
 
     while(!q.empty()){
         //printf("empty 들어옴.");
@@ -50,12 +52,12 @@ void bfs(int x, int y){
                     box[nx][ny] = 1;
                     visit[nx][ny] = 1;
                 }
-                //토마토가 없을때
+                /*토마토가 없을때
                 else if( box[nx][ny] == -1 && visit[nx][ny] ==0){
                     day[nx][ny] = -1;
                     visit[nx][ny] = 1;
                 }
-                
+                */
             }
         }
     }
@@ -71,15 +73,22 @@ int main(){
     for(int i=0; i< n; i++){
         for(int j=0; j<m ;j++){
             scanf("%d",&box[i][j]);
-            //if(box[i][j]==1) q.push(make_pair(i,j));
+            if(box[i][j]==1) q.push(make_pair(i,j));
         }
     }
 
 
     //원점부터 탐색~~
     bfs(0,0);
-
-   printf("%d", day[n][m]);
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            if(box[i][j] == 0){
+                cout << "-1" <<endl;
+                return 0;
+            }
+        }
+    }
+    printf("%d", day[n][m]-1);
 
     return 0;
 }
