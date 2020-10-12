@@ -76,7 +76,7 @@ int main() {
 			if (map[i][j] == 'S') {
 				sx = i;
 				sy = j;
-				map[i][j] = '.';
+				map[i][j] = '.'; // 시작점도 거칠 수 있으므로 .으로 바꿔줌
 			}
 			else if (map[i][j] == 'C') {
 				num++;
@@ -89,7 +89,7 @@ int main() {
 
 	bfs(sx, sy);
 
-	if (answer == 0) printf("-1\n");
+	if (answer == 0) printf("-1\n"); // 불가능하면 -1 출력
 	else printf("%d\n", answer);
 
 	return 0;
