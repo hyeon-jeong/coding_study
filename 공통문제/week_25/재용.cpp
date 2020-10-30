@@ -28,8 +28,7 @@ int main()
 						dp[day][i] = 1;
 					}
 				}
-				else {
-					// 2일차 ~
+				else { // 2일차 ~
 					// 전날까지의 경우의 수가 0이 아니면
 					if (dp[day - 1][i] != 0) {
 						for (int j = 1; j < 16; j++) {
