@@ -8,17 +8,17 @@ vector<int> solution(int n) {
     vector<int> answer;
     int x = 0, y = 0; // 좌표
     int num = 1; // 채워넣을 숫자
-    int state = 0; // 아래(0), 오른쪽(1), 위(2)
+    int dir = 0; // 아래(0), 오른쪽(1), 위(2)
     
     for(int i = 0; i < n; i++){
-        switch(state){
+        switch(dir){
             case 0: // 아래
                 for(int j = i; j < n; j++){
                     arr[x++][y] = num++;
                 }
                 x--;
                 y++;
-                state = 1;
+                dir = 1;
                 break;
             case 1: // 오른쪽
                 for(int j = i; j < n; j++){
@@ -26,7 +26,7 @@ vector<int> solution(int n) {
                 }
                 y -= 2;
                 x--;
-                state = 2;
+                dir = 2;
                 break;
             case 2: // 위
                 for(int j = i; j < n; j++){
@@ -34,7 +34,7 @@ vector<int> solution(int n) {
                 }
                 x += 2;
                 y++;
-                state = 0;
+                dir = 0;
                 break;
         }
     }
