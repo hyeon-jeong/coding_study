@@ -10,10 +10,6 @@
                 "/System/Library/Frameworks",
                 "/Library/Frameworks"
             ],
-            "compilerPath": [
-                "/usr/bin/gcc",
-                "/usr/bin/g++"
-            ],
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "clang-x64"
