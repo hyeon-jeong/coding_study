@@ -84,6 +84,7 @@ int total_ice() {
 	return total;
 }
 
+/* 얼음 덩어리의 크기를 계산하는 BFS */
 int bfs(int x, int y) {
 	int ice = 1;
 	queue<pair<int, int>> q;
@@ -116,7 +117,7 @@ int max_ice() {
 	int answer = 0;
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
-      /* A[i][j] == 0으로 조건 설정하면 개수를 잘못 셈 (이유는 모르겠음) */
+      			/* A[i][j] == 0으로 조건 설정하면 개수를 잘못 셈 (이유는 모르겠음) */
 			if (visited[i][j] == 1 || A[i][j] <= 0) continue;
 			answer = max(answer, bfs(i, j));
 		}
