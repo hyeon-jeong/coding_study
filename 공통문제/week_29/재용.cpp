@@ -47,11 +47,13 @@ long long solution(string expression) {
 		num.push_back(stoll(stringBuffer));
 	}
 
-
+	
+	/* 연산자 순위 순회 */
 	for (int p = 0; p < 6; p++) {
 		vector<char> temp_oper = oper;
 		vector<long long> temp_num = num;
-
+		
+		/* 연산자 우선순위 순서대로 계산 */
 		for (int c = 0; c < 3; c++) {
 			char op = prior[p][c];
 
@@ -61,7 +63,7 @@ long long solution(string expression) {
 
 					temp_num.erase(temp_num.begin() + i + 1);
 					temp_oper.erase(temp_oper.begin() + i);
-					i--;
+					i--; // i번째 원소를 지웠기 때문에 다음 연산자는 i번째여야 함
 				}
 			}
 		}
