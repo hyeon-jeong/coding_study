@@ -14,6 +14,7 @@ vector<pair<int, int>> network[MAX];
 int dist[MAX];
 
 bool dijkstra(int mid) {
+	/* memset을 쓰면 답이 잘못 나옴 */
 	for (int i = 0; i <= N; i++) dist[i] = INF;
 
 	priority_queue<pair<int, int>> pq; // first: cost, second: next point
