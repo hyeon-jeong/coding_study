@@ -16,14 +16,13 @@ int dy[4] = {0,0,1,-1};
 bool visited[101][101] = {false,};
 
 void dfs(int x, int y){
-    memset(visited, false, sizeof(visited));
     visited[x][y] = true;
     
     for(int i=0; i<4; i++){
         int nx = x + dx[i];
         int ny = y + dy[i];
         
-        if(x<1 || y<1 || x>n || y>n)
+        if(x<1 || y<1 || nx>n || ny>n)
             continue;
         if(!visited[nx][ny] && road[x][y].count({nx,ny}) == 0)
             dfs(nx,ny);
@@ -48,9 +47,10 @@ int main(){
     }
     
     for(int i=0; i<cow.size(); i++){
+        memset(visited, false, sizeof(visited));
         dfs(cow[i].first, cow[i].second);
         for(int j=i+1; j<cow.size(); j++){
-            if(!visited[cow[i].first][cow[i].second])
+            if(!visited[cow[j].first][cow[j].second])
                 ans++;
         }
     }
