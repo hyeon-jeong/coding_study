@@ -4,6 +4,7 @@
 #include <utility>
 #include <set>
 #include <cstdio>
+#include <cstring>
 using namespace std;
 
 int n,k,r;
@@ -15,6 +16,7 @@ int dy[4] = {0,0,1,-1};
 bool visited[101][101] = {false,};
 
 void dfs(int x, int y){
+    memset(visited, false, sizeof(visited));
     visited[x][y] = true;
     
     for(int i=0; i<4; i++){
@@ -46,7 +48,6 @@ int main(){
     }
     
     for(int i=0; i<cow.size(); i++){
-        visited[101][101] = {false,};
         dfs(cow[i].first, cow[i].second);
         for(int j=i+1; j<cow.size(); j++){
             if(!visited[cow[i].first][cow[i].second])
