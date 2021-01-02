@@ -23,9 +23,8 @@ void dfs(int x, int y){
         
         if(x<1 || y<1 || x>n || y>n)
             continue;
-        if(visited[nx][ny] || road[nx][ny].count({nx,ny}))
-            continue;
-        dfs(nx,ny);
+        if(!visited[nx][ny] || road[nx][ny].count({nx,ny}) == 0)
+            dfs(nx,ny);
     }
 }
 
