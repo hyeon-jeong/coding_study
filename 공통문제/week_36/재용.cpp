@@ -1,4 +1,4 @@
-// 16234_인구이동.cpp
+// 6064_카잉달력.cpp
 #define _CRT_SECURE_NO_WARNINGS
 #include <cstdio>
 #include <algorithm>
