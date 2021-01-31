@@ -3,8 +3,10 @@ input = sys.stdin.readline
 
 N = int(input())
 answer = [0]*N
+# 정답이 들어갈 배열
 s = input()
 S = [[0 for _ in range(N)] for _ in range(N)]
+# 문제에서 원하는 수열로 변경해준다.
 k = 0
 
 for i in range(N):
@@ -14,8 +16,10 @@ for i in range(N):
         elif s[k] == '-' :
             S[i][j] = -1
         k = k+1
+# 문제에서 제시한 모양으로 행렬을 채워주는데, -는 -1로, +는 1로 변경한다.
 
 def cul(x) :
+# 규현이가 계산한 대로 계산하는 함수 
     a = 0
     for i in range(x, -1, -1) :
        a = a + answer[i]
@@ -32,6 +36,7 @@ def cul(x) :
        
 
 def choose(x) :
+# answer에 들어갈 값을 정하는 함수
     if x == N :
         return True
     if S[x][x] == 0 :
