@@ -1,4 +1,5 @@
 // 2021_카카오 : 합승_택시_요금.cpp
+// 정확성 50.0, 효율성 30.0 (시간초과)
 #include <queue>
 #include <vector>
 #include <utility>
