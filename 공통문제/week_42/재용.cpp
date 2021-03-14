@@ -1,7 +1,6 @@
 // 2021 카카오 : 광고삽입.cpp
 #include <string>
 #include <vector>
-#include <cctype>
 #include <queue>
 using namespace std;
 
@@ -41,7 +40,11 @@ string secToStr(int time){
 string solution(string play_time, string adv_time, vector<string> logs) {
     string answer = "";
     
-    int timeline[360000]; // 각 시간별 누적 시청자 수
+    // 지역변수로 선언 시 반드시 0으로 초기화해주기
+    // 전역변수로 선언할 때는 자동으로 0으로 초기화되지만,
+    // 지역변수로 선언할 때는 내가 명시해줘야함
+    int timeline[360000] = { 0, }; // 각 시간별 누적 시청자 수
+    
     
     int n = strToSec(play_time); // 전체 길이
     int m = strToSec(adv_time); // 광고 길이
