@@ -54,7 +54,7 @@ string solution(string play_time, string adv_time, vector<string> logs) {
 	}
 
 	int N = str_to_time(play_time);
-	int len = time_to_str(adv_time);
+	int len = str_to_time(adv_time);
 
 	int idx=0;
 	long long sum=0;
