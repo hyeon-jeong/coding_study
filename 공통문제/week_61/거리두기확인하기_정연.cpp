@@ -5,11 +5,10 @@
 
 using namespace std;
 
-bool visited[5][5];
 int dx[4] = {1,-1,0,0};
 int dy[4] = {0,0,1,-1};
 
-int bfs(int x, int y, vector<string> map){
+int bfs(int x, int y, vector<string> map, bool visited[5][5]){
     queue<pair<pair<int,int>,int>> q;
     int distancing = 1;
     q.push(make_pair(make_pair(x,y),0));
@@ -20,9 +19,6 @@ int bfs(int x, int y, vector<string> map){
         int cury = q.front().first.second;
         int manhattan = q.front().second;
         q.pop();
-            
-        if (manhattan == 2)
-            continue;
             
         for(int i=0; i<4; i++){
             int nextx = curx + dx[i];
@@ -40,7 +36,7 @@ int bfs(int x, int y, vector<string> map){
                         q.push(make_pair(make_pair(nextx,nexty), manhattan+1));
                     }
 
-                    else if (map[nextx][nexty] == 'P'){
+                    else if (manhattan <=2 && map[nextx][nexty] == 'P'){
                         return 0;
                     }
                 }
@@ -53,19 +49,17 @@ int bfs(int x, int y, vector<string> map){
 vector<int> solution(vector<vector<string>> places) {
     vector<int> answer;
     
+    int res = 1;
     for(int k=0; k<5; k++){ // 5개 대기실
+        bool visited[5][5];
         for(int i=0; i<5; i++){ // 대기실 당 5x5
             for(int j=0; j<5; j++){
-                visited[i][j] = false;
                 if(places[k][i][j] == 'P'){
-                    int res = bfs(i,j, places[k]);
-                    answer.push_back(res);
+                    res = bfs(i,j, places[k], visited);
                 }
             }
         }
-    }
-    for(int i=0; i<5; i++){
-        cout<<answer[i]<<endl;
+        answer.push_back(res);
     }
     return answer;
 }
