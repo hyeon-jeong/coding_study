@@ -7,7 +7,6 @@ using namespace std;
 
 int curPos;
 int n,k;
-stack <int> deleted;
 
 struct Node{
     int data;
@@ -17,6 +16,7 @@ struct Node{
 };
 
 vector<Node*> table;
+stack <int> deleted;
 
 void command(vector<string>& cmd){ 
     for(string s : cmd){
@@ -42,13 +42,13 @@ void command(vector<string>& cmd){
                 curPos = table[curPos] -> next -> data;
             }
             
-            else if(table[curPos] -> next == NULL){
+            if(table[curPos] -> next == NULL){
                 table[curPos] -> prev -> next = NULL;
                 curPos = table[curPos] -> prev -> data;
             }
             
             else{
-                //table[curPos] -> prev -> next = table[curPos] -> next;
+                table[curPos] -> prev -> next = table[curPos] -> next;
                 table[curPos] -> next -> prev = table[curPos] -> prev;
                 curPos = table[curPos] -> next -> data;
             }
@@ -70,28 +70,33 @@ void command(vector<string>& cmd){
 }
 
 string solution(int n, int k, vector<string> cmd) {
-    string answer = "";
+    string answer(n, 'X');
     curPos = k;
     table = vector<Node*>(n);
     
-    for(int i=0; i<n; i++)
+    for(int i=0; i<n; i++){
         table[i] = new Node(i);
+    }
     
     table[0] -> next = table[1];
     table[n-1] -> prev = table[n-2];
         
     for(int i=1; i<n-1; i++){
         table[i] -> next = table[i+1];
-        table[i-1] -> prev = table[i-2];
+        table[i] -> prev = table[i-1];
     }
     
     command(cmd);
-
-    for(int i=0; i<n; i++){
-        if(table[i])
-            answer += 'O';
-        else
-            answer += 'X';
+    
+    int search = 0;
+    if(table[0]->data == 0)
+        answer[0] = 'O';
+    else
+        answer[0] = 'X';
+    
+    while(table[search]->next != NULL){
+        search = table[search]->next->data;
+        answer[search] = 'O';
     }
     
     return answer;
