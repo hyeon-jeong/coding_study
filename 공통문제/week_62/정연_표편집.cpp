@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <stack>
+#include <iostream>
 
 using namespace std;
 
@@ -17,7 +18,7 @@ struct Node{
 
 vector<Node*> table;
 
-void command(vector<string>& cmd){    
+void command(vector<string>& cmd){ 
     for(string s : cmd){
         if(s[0] == 'U' || s[0] == 'D'){
             int move = stoi(s.substr(2)); //단순히 s[2] 로 하면 오류가 난다.
@@ -35,18 +36,21 @@ void command(vector<string>& cmd){
         
         else if(s[0] == 'C'){
             deleted.push(curPos); // 삭제해야 하므로 deleted stack에 저장
-         
-            if(table[curPos] -> prev != NULL) // 첫 번째 노드가 아닌 경우
-                table[curPos] -> prev -> next = table[curPos] -> next; // prev의 next = 현재의 next
             
-            if(table[curPos] -> next != NULL){ // 마지막 노드가 아닌 경우
-                table[curPos] -> next -> prev = table[curPos] -> next; // next 의 prev = 현재의 prev
-                curPos = table[curPos] -> next -> data; // 마지막 노드 x or 첫 번째 노드 => 다음 행으로
+            if(table[curPos] -> prev == NULL){
+                
             }
             
-            else
-                curPos = table[curPos] -> prev -> data; // 마지막 노드 => 이전 행으로
+            else if(table[curPos] -> next == NULL){
+                table[curPos] -> prev -> next = NULL;
+                curPos = table[curPos] -> prev -> data;
+            }
             
+            else{
+                //table[curPos] -> prev -> next = table[curPos] -> next;
+                table[curPos] -> next -> prev = table[curPos] -> prev;
+                //curPos = table[curPos] -> next -> data;
+            }
         }
         
         else if(s[0] == 'Z'){
@@ -82,5 +86,12 @@ string solution(int n, int k, vector<string> cmd) {
     
     command(cmd);
 
+    for(int i=0; i<n; i++){
+        if(table[i])
+            answer += 'O';
+        else
+            answer += 'X';
+    }
+    
     return answer;
 }
