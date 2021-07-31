@@ -88,15 +88,19 @@ string solution(int n, int k, vector<string> cmd) {
     
     command(cmd);
     
-    int search = 0;
-    if(table[0]->data == 0)
-        answer[0] = 'O';
-    else
-        answer[0] = 'X';
+    int leftCheck, rightCheck;
+    leftCheck = rightCheck = curPos;
     
-    while(table[search]->next != NULL){
-        search = table[search]->next->data;
-        answer[search] = 'O';
+    answer[curPos] = 'O';
+
+    while(table[leftCheck]->prev != NULL){
+        leftCheck = table[leftCheck]->prev->data;
+        answer[leftCheck] = 'O';
+    }
+
+    while(table[rightCheck]->next != NULL){
+        rightCheck = table[rightCheck]->next->data;
+        answer[rightCheck] = 'O';
     }
     
     return answer;
