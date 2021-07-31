@@ -38,7 +38,8 @@ void command(vector<string>& cmd){
             deleted.push(curPos); // 삭제해야 하므로 deleted stack에 저장
             
             if(table[curPos] -> prev == NULL){
-                
+                table[curPos] -> next -> prev = NULL;
+                curPos = table[curPos] -> next -> data;
             }
             
             else if(table[curPos] -> next == NULL){
@@ -49,7 +50,7 @@ void command(vector<string>& cmd){
             else{
                 //table[curPos] -> prev -> next = table[curPos] -> next;
                 table[curPos] -> next -> prev = table[curPos] -> prev;
-                //curPos = table[curPos] -> next -> data;
+                curPos = table[curPos] -> next -> data;
             }
         }
         
