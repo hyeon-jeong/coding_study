@@ -42,7 +42,7 @@ void command(vector<string>& cmd){
                 curPos = table[curPos] -> next -> data;
             }
             
-            if(table[curPos] -> next == NULL){
+            else if(table[curPos] -> next == NULL){
                 table[curPos] -> prev -> next = NULL;
                 curPos = table[curPos] -> prev -> data;
             }
