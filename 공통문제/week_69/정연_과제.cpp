@@ -4,10 +4,7 @@
 using namespace std;
 
 bool compare(const pair<int,int> &a, const pair<int,int> &b){
-    if (a.second == b.second)
-        return a.first < b.first ? true : false;
-    else
-        return a.second > b.second ? true : false;
+    return a.second > b.second ? true : false;
 }
 
 int main(){
@@ -22,20 +19,20 @@ int main(){
     }
     sort(assignment.begin(), assignment.end(), compare);
     
-    int score[n+1] = {0,};
+    int score[1000] = {0,};
     for(int i=0; i<n; i++){
-        int idx = assignment[i].first;
+        int idx = assignment[i].first - 1;
         if(!score[idx])
             score[idx] = assignment[i].second;
             
         else{
             while(score[--idx]);
-            if(idx != 0 && assignment[i].second > score[idx])
+            if(idx >= 0 && assignment[i].second > score[idx])
                 score[idx] = assignment[i].second;
         }
     }
 
-    for(int i=1; i<=n; i++)
+    for(int i=0; i<1000; i++)
         answer += score[i];
         
     cout<<answer<<endl;
