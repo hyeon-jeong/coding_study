@@ -19,20 +19,20 @@ int main(){
     }
     sort(assignment.begin(), assignment.end(), compare);
     
-    int score[1000] = {0,};
+    int score[1001] = {0,};
     for(int i=0; i<n; i++){
-        int idx = assignment[i].first - 1;
+        int idx = assignment[i].first;
         if(!score[idx])
             score[idx] = assignment[i].second;
             
         else{
-            while(score[--idx]);
-            if(idx >= 0 && assignment[i].second > score[idx])
+            while(score[--idx]){if(idx==1) break;};
+            if(idx > 0 && assignment[i].second > score[idx])
                 score[idx] = assignment[i].second;
         }
     }
 
-    for(int i=0; i<1000; i++)
+    for(int i=1; i<1001; i++)
         answer += score[i];
         
     cout<<answer<<endl;
